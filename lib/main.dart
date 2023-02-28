@@ -5,25 +5,23 @@ extension Log on Object {
   void log() => devtools.log(toString());
 }
 
-abstract class CanRun {
+mixin CanRun {
+  int get speed;
   void run() {
-    "Running...".log();
+    "Running at the speed of $speed".log();
   }
 }
 
-abstract class CanWalk {
-  void walk() {
-    "Walking...".log();
-  }
+class Cat with CanRun {
+  @override
+  int speed = 10;
 }
-
-class Cat with CanRun, CanWalk {}
 
 void testIt() {
   final cat = Cat();
-  cat
-    ..run()
-    ..walk();
+  cat.run();
+  cat.speed = 20;
+  cat.run();
 }
 
 void main() {
